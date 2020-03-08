@@ -1,7 +1,5 @@
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
+import GridContainer from "../Grid/GridContainer";
+import GridItem from "../Grid/GridItem";
 
 import React, { Component } from "react";
 
@@ -38,67 +36,74 @@ export default class ProfileImage extends Component {
   };
 
   render() {
-    const { imageUrl, handleImageUrlChange } = this.props;
+    const {
+      imageUrl,
+      handleImageUrlChange,
+      classesProfile,
+      imageClasses
+    } = this.props;
     return (
-      <div>
-        <GridList cellHeight={200} spacing={2}>
-          <GridListTile>
-            {/* <img
-              src="https://www.istockphoto.com/nl/vector/kleurrijke-brown-cirkel-chef-logo-gm1056400912-282321319"
-              alt="Jend Hordejan"
-            /> */}
-            <img src={imageUrl} alt="" />
-            <GridListTileBar
-              actionIcon={
-                <IconButton aria-label={`import`}>
-                  <input
-                    type="file"
-                    name="file"
-                    placeholder="Choose an Image"
-                    onChange={this.UploadImage(handleImageUrlChange)}
-                  />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-          {/* <button onClick={this.UploadImage}>upload</button> */}
-        </GridList>
+      <div className={classesProfile.container}>
+        <GridContainer justify={"center"}>
+          <GridItem xs={12} sm={12} md={6}>
+            <div className={classesProfile.viewProfile}>
+              <div>
+                <img src={imageUrl} alt="..." className={imageClasses} />
+              </div>
+            </div>
+          </GridItem>
+        </GridContainer>
+        <GridContainer justify={"center"}>
+          <input
+            type="file"
+            name="file"
+            placeholder="Choose an Image"
+            onChange={this.UploadImage(handleImageUrlChange)}
+          />
+        </GridContainer>
       </div>
+      // <Grid container spacing={12} justify={"center"}>
+      //   <Grid item xs={5} sm={6}>
+      //     <div className={classesProfile.profile}>
+      //       <img src={imageUrl} alt="..." className={imageClasses} />
+
+      //       <input
+      //         type="file"
+      //         name="file"
+      //         placeholder="Choose an Image"
+      //         onChange={this.UploadImage(handleImageUrlChange)}
+      //       />
+      //     </div>
+      //   </Grid>
+      //   {/* <Grid item xs={5} sm={6}>
+      //       <input
+      //         type="file"
+      //         name="file"
+      //         placeholder="Choose an Image"
+      //         onChange={this.UploadImage(handleImageUrlChange)}
+      //       />
+      //   </Grid> */}
+      // </Grid>
     );
   }
 }
 
-// export default function ProfileImage() {
-//   //   const classes = useStyles();
-// //   const [image, setImage] = useState("");
-// //   const [loading, setLoading] = useState(false);
-
-//   return (
-//     <div>
-//       <GridList cellHeight={200} spacing={2}>
-//         <GridListTile>
-//           <img
-//             src={
-//               image
-//                 ? image
-//                 : "https://media.istockphoto.com/vectors/colorful-brown-circle-chef-logo-vector-id1056400912"
-//             }
-//             alt="Jend Hordejan"
-//           />
-//           <GridListTileBar
-//             actionIcon={
-//               <IconButton aria-label={`import`}>
-//                 <input
-//                   type="file"
-//                   name="file"
-//                   placeholder="Upload an image"
-//                   onChange={() => UploadImage}
-//                 />
-//               </IconButton>
-//             }
-//           />
-//         </GridListTile>
-//       </GridList>
-//     </div>
-//   );
-// }
+// <div>
+//   <GridList cellHeight={200} spacing={2}>
+//     <GridListTile>
+//       <img src={imageUrl} alt="" />
+//       <GridListTileBar
+//         actionIcon={
+//           <IconButton aria-label={`import`}>
+//             <input
+//               type="file"
+//               name="file"
+//               placeholder="Choose an Image"
+//               onChange={this.UploadImage(handleImageUrlChange)}
+//             />
+//           </IconButton>
+//         }
+//       />
+//     </GridListTile>
+//   </GridList>
+// </div>

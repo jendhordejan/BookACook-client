@@ -5,23 +5,26 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
 
 import SignupDetails from "./SignupDetails";
 import AddressForm from "./AddressForm";
+import ReviewSignUp from "./ReviewSignup";
 
 export default class SignupForm extends Component {
   state = {
     activeStep: 0,
-    firstName: "jend",
-    lastName: "hordejan",
-    email: "hello",
+    firstName: "Jend",
+    lastName: "Hordejan",
+    email: "jendhordejan@gmail.com",
     password: "pass",
     confirmPassword: "pass",
     imageUrl:
       "https://media.istockphoto.com/vectors/colorful-brown-circle-chef-logo-vector-id1056400912",
-    houseNo: "",
-    postCode: "",
-    about: "",
+    houseNo: "8",
+    postCode: "3511VD",
+    about:
+      "Hi! I always find joy to watch people enjoy the food that I prepare. :)",
     verifiedAddress: "",
     address: ""
   };
@@ -33,36 +36,45 @@ export default class SignupForm extends Component {
       "Review your registration"
     ];
 
-    function getStepContent(step, handleChange, values) {
+    function getStepContent(
+      step,
+      handleChange,
+      values,
+      classesProfile,
+      imageClasses
+    ) {
+      // classesProfile, imageClasses - style for personalprofile to be passed as props
+      console.log("STEP: ", steps[step]);
       switch (step) {
         case 0:
           return <SignupDetails handleChange={handleChange} values={values} />;
-
         case 1:
-          //   return <PaymentForm />;
           return (
             <AddressForm
               handleChange={handleChange}
               values={values}
               handleImageUrlChange={handleImageUrlChange}
+              handleVerifyAddress={handleVerifyAddress}
+              classesProfile={classesProfile}
+              imageClasses={imageClasses}
             />
           );
         case 2:
-          //   return <Review />;
-          return <AddressForm />;
+          return (
+            <ReviewSignUp
+              values={values}
+              classes={classes}
+              classesProfile={classesProfile}
+              imageClasses={imageClasses}
+            />
+          );
         default:
           throw new Error("Unknown step");
       }
     }
 
     const handleImageUrlChange = value => {
-      console.log("Lets finally set the IMAGEURL:", value);
-
       this.setState({ imageUrl: value });
-      console.log(
-        "let's check imageURL from SignupForm: ",
-        this.state.imageUrl
-      );
     };
 
     const handleChange = input => e => {
@@ -77,7 +89,29 @@ export default class SignupForm extends Component {
       this.setState({ activeStep: this.state.activeStep - 1 });
     };
 
-    const { classes } = this.props;
+    const handleVerifyAddress = async () => {
+      console.log(
+        `house no: ${this.state.houseNo} | post code: ${this.state.postCode}`
+      );
+      // const addressData = this.props.verifyAddress(this.state.houseNo,this.state.postCode)
+      // console.log("addressData: ", addressData);
+      console.log("this.state BEFORE VERIFY ADDRESS", this.state);
+      try {
+        const addressData = await axios.get(
+          `http://api.postcodedata.nl/v1/postcode/?postcode=${this.state.postCode}&streetnumber=${this.state.houseNo}&ref=domeinnaam.nl&type=json`
+        );
+
+        this.setState({
+          verifiedAddress: true,
+          address: addressData.data.details[0]
+        });
+        console.log("this.state", this.state);
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    const { classes, classesProfile, imageClasses } = this.props;
     return (
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -111,7 +145,9 @@ export default class SignupForm extends Component {
                 {getStepContent(
                   this.state.activeStep,
                   handleChange,
-                  this.state
+                  this.state,
+                  classesProfile,
+                  imageClasses
                 )}
                 <div className={classes.buttons}>
                   {this.state.activeStep !== 0 && (
@@ -126,7 +162,7 @@ export default class SignupForm extends Component {
                     className={classes.button}
                   >
                     {this.state.activeStep === steps.length - 1
-                      ? "Place order"
+                      ? "Submit"
                       : "Next"}
                   </Button>
                 </div>

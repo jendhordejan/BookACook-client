@@ -1,28 +1,39 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import ProfileImage from "./ProfileImage";
+import Button from "@material-ui/core/Button";
 
 import React, { Component } from "react";
 
 export default class AddressForm extends Component {
   render() {
-    const { values, handleChange, handleImageUrlChange } = this.props;
-    console.log("RENDERING", values.imageUrl);
+    const {
+      values,
+      handleChange,
+      handleImageUrlChange,
+      handleVerifyAddress,
+      classesProfile,
+      imageClasses
+    } = this.props;
 
     return (
       <React.Fragment>
-        <Typography variant="h6" gutterBottom>
-          Personal details
-        </Typography>
-        <Grid container spacing={12} justify={"center"}>
-          <ProfileImage
-            imageUrl={values.imageUrl}
-            handleImageUrlChange={handleImageUrlChange}
-          />
-        </Grid>
+        <div>
+          <Typography variant="h6" gutterBottom>
+            Personal details
+          </Typography>
+        </div>
+        {/* <Grid container spacing={3} justify={"center"}> */}
+        <ProfileImage
+          imageUrl={values.imageUrl}
+          handleImageUrlChange={handleImageUrlChange}
+          classesProfile={classesProfile}
+          imageClasses={imageClasses}
+          fullWidth="true"
+        />
+        {/* </Grid> */}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -46,62 +57,48 @@ export default class AddressForm extends Component {
               defaultValue={values.lastName}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="imageUrl"
-              name="imageUrl"
-              label="imageUrl"
+              id="houseNo"
+              name="houseNo"
+              label="House No"
               fullWidth
-              // defaultValue={values.imageUrl}
-              onChange={handleChange("imageUrl")}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="address2"
-              name="address2"
-              label="Address line 2"
-              fullWidth
-              autoComplete="billing address-line2"
+              onChange={handleChange("houseNo")}
+              disabled={values.verifiedAddress ? true : false}
+              defaultValue={values.houseNo}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="city"
-              name="city"
-              label="City"
-              fullWidth
-              autoComplete="billing address-level2"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="state"
-              name="state"
-              label="State/Province/Region"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="zip"
-              name="zip"
+              id="postCode"
+              name="postCode"
               label="Zip / Postal code"
               fullWidth
-              autoComplete="billing postal-code"
+              onChange={handleChange("postCode")}
+              disabled={values.verifiedAddress ? true : false}
+              defaultValue={values.postCode}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleVerifyAddress}
+          >
+            {values.verifiedAddress ? "VERIFIED" : "Verify Address"}
+          </Button>
+          <Grid item xs={12}>
             <TextField
-              required
-              id="country"
-              name="country"
-              label="Country"
+              id="outlined-multiline-static"
+              label="About Me"
+              placeholder="Tell something about yourself"
+              multiline
+              rows="4"
+              onChange={handleChange("about")}
+              defaultValue={values.about}
+              variant="outlined"
               fullWidth
-              autoComplete="billing country"
             />
           </Grid>
         </Grid>
