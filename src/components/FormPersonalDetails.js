@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Dialog from '@material-ui/core/Dialog';
+// import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 
 export class FormPersonalDetails extends Component {
   continue = e => {
@@ -16,8 +17,11 @@ export class FormPersonalDetails extends Component {
     this.props.prevStep();
   };
 
+
+
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, handleVerifyAddress } = this.props;
+   
     return (
       <MuiThemeProvider >
         {/* <React.Fragment> */}
@@ -27,6 +31,8 @@ export class FormPersonalDetails extends Component {
             maxWidth='sm'
           >
             <AppBar title="Enter Personal Details" />
+            {/* {UploadImage} */}
+
             <TextField
               placeholder="Enter Your Email"
               label="Email"
@@ -35,6 +41,8 @@ export class FormPersonalDetails extends Component {
               margin="normal"
 							fullWidth="true"
             />
+            <br />
+
             <br />
             <TextField
               placeholder="Enter Your Password"
@@ -45,14 +53,14 @@ export class FormPersonalDetails extends Component {
 							fullWidth="true"
             />
             <br />
-
             <TextField
               placeholder="Enter Your House No"
               label="House No"
               onChange={handleChange('houseNo')}
               defaultValue={values.HouseNo}
               margin="normal"
-							fullWidth="true"
+              fullWidth="true"
+              disabled={values.verifiedAddress ? true : false}
             />
             <br />
             <TextField
@@ -61,8 +69,13 @@ export class FormPersonalDetails extends Component {
               onChange={handleChange('postCode')}
               defaultValue={values.postCode}
               margin="normal"
-							fullWidth="true"
+              fullWidth="true"
+              disabled={values.verifiedAddress ? true : false}
             />
+            <br />
+            <button onClick={handleVerifyAddress}>
+            {values.verifiedAddress ? 'VERIFIED' : 'Verify Address'}
+            </button>
             <br />
             <TextField
               placeholder="Say a little somethinb about yourself"

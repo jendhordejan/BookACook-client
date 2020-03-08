@@ -20,7 +20,6 @@ export function userSignUp(firstName, lastName, email, password, imageUrl, house
 
 
 
-
 function userSignUpSucess(responseData){
     console.log(responseData);
     const { firstName, lastName, email, password, imageUrl, houseNo, postCode, about } = responseData;
