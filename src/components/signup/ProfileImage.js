@@ -1,9 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
 
 import React, { Component } from "react";
 
@@ -45,11 +43,11 @@ export default class ProfileImage extends Component {
       <div>
         <GridList cellHeight={200} spacing={2}>
           <GridListTile>
-            <img
-              src={imageUrl}
+            {/* <img
+              src="https://www.istockphoto.com/nl/vector/kleurrijke-brown-cirkel-chef-logo-gm1056400912-282321319"
               alt="Jend Hordejan"
-              //   defaultValue={this.state.image}
-            />
+            /> */}
+            <img src={imageUrl} alt="" />
             <GridListTileBar
               actionIcon={
                 <IconButton aria-label={`import`}>

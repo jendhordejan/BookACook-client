@@ -8,19 +8,9 @@ import ProfileImage from "./ProfileImage";
 import React, { Component } from "react";
 
 export default class AddressForm extends Component {
-  state = {
-    localImageUrl: "HELLO"
-  };
-  // handleImageChange = imageUrl => {
-  //   console.log("Lets handle this url: ", imageUrl);
-
-  //   this.setState({ localImageUrl: imageUrl });
-  //   console.log("Changed localImageUrl: ", this.state.localImageUrl);
-  // };
-
   render() {
     const { values, handleChange, handleImageUrlChange } = this.props;
-    console.log("RENDERING");
+    console.log("RENDERING", values.imageUrl);
 
     return (
       <React.Fragment>
@@ -63,8 +53,8 @@ export default class AddressForm extends Component {
               name="imageUrl"
               label="imageUrl"
               fullWidth
-              defaultValue={values.imageUrl}
-              // onChange={handleChange("imageUrl")}
+              // defaultValue={values.imageUrl}
+              onChange={handleChange("imageUrl")}
             />
           </Grid>
           <Grid item xs={12}>

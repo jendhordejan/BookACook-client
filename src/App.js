@@ -7,7 +7,7 @@ import store from "./store";
 import NavBar from "./components/NavBar";
 import Home from "./components/HomeContainer";
 import UserForm from "./components/UserForm";
-import SignUpForm from "./components/signup/SignupForm";
+import SignUpContainer from "./components/signup/SingupContainer";
 import UploadImage from "./components/UploadImage";
 import Footer from "./components/Footer";
 // import { Toolbar } from 'material-ui';
@@ -21,7 +21,7 @@ class App extends Component {
         {/* <Route path="/" exact component={Home} /> */}
         {/* <Route path="/" exact component={UploadImage}/> */}
         {/* <Route path="/" exact component={UserForm} /> */}
-        <Route path="/" exact component={SignUpForm} />
+        <Route path="/" exact component={SignUpContainer} />
         <Footer />
       </Provider>
     );
