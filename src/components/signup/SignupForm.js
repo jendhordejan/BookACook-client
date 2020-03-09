@@ -5,13 +5,24 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import axios from "axios";
 
 import SignupDetails from "./SignupDetails";
 import AddressForm from "./AddressForm";
 import ReviewSignUp from "./ReviewSignup";
+// import Success from "./Success";
+import { Link } from "react-router-dom";
 
-export default class SignupForm extends Component {
+import {
+  userSignUp,
+  userProfileSignUp,
+  userAddressSignUp
+} from "../../UserCook/action";
+// import userProfileSignUp from "../../UserCook/action";
+
+import { connect } from "react-redux";
+import axios from "axios";
+
+class SignupForm extends Component {
   state = {
     activeStep: 0,
     firstName: "Jend",
@@ -25,7 +36,7 @@ export default class SignupForm extends Component {
     postCode: "3511VD",
     about:
       "Hi! I always find joy to watch people enjoy the food that I prepare. :)",
-    verifiedAddress: "",
+    verifiedAddress: false,
     address: ""
   };
 
@@ -82,6 +93,13 @@ export default class SignupForm extends Component {
     };
 
     const handleNext = () => {
+      console.log(
+        `handleNext activeStep: ${this.state.activeStep} || steps.length: ${steps.length}`
+      );
+      if (this.state.activeStep === steps.length - 1) {
+        console.log("Let's submit");
+        handleSubmit(this.state);
+      }
       this.setState({ activeStep: this.state.activeStep + 1 });
     };
 
@@ -111,6 +129,85 @@ export default class SignupForm extends Component {
       }
     };
 
+    const resetState = () => {
+      this.setState({
+        activeStep: 0,
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        imageUrl:
+          "https://media.istockphoto.com/vectors/colorful-brown-circle-chef-logo-vector-id1056400912",
+        houseNo: "",
+        postCode: "",
+        about: "",
+        verifiedAddress: false,
+        address: ""
+      });
+    };
+
+    const handleSubmit = async stateValues => {
+      console.log("INSIDE HANDLE SUBMIT. Let's check the local: ", this.state);
+      await this.props.userSignUp(this.state);
+
+      console.log("THIS.PROPS: ", this.props.user);
+      const userId = this.props.user.id;
+      const {
+        imageUrl,
+        firstName,
+        lastName,
+        houseNo,
+        postCode,
+        about
+      } = this.state;
+      const userProfileData = {
+        imageUrl,
+        firstName,
+        lastName,
+        houseNo,
+        postCode,
+        about,
+        userId
+      };
+      //construct data to be saved in userProfile
+      this.props.userProfileSignUp(userProfileData);
+
+      const {
+        street,
+        city,
+        municipality,
+        province,
+        postcode,
+        pnum,
+        pchar,
+        rd_x,
+        rd_y,
+        lat,
+        lon
+      } = this.state.address;
+      const houseno = this.state.houseNo;
+
+      //construct data to be saved in userAddress
+      const userAddressData = {
+        street,
+        city,
+        municipality,
+        province,
+        houseno,
+        postcode,
+        pnum,
+        pchar,
+        rd_x,
+        rd_y,
+        lat,
+        lon,
+        userId
+      };
+
+      this.props.userAddressSignUp(userAddressData);
+    };
+
     const { classes, classesProfile, imageClasses } = this.props;
     return (
       <main className={classes.layout}>
@@ -132,12 +229,11 @@ export default class SignupForm extends Component {
             {this.state.activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Thank you for registering.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  We have emailed your registration confirmation, please cick{" "}
+                  <Link to="/home">here</Link> to go to home page
                 </Typography>
               </React.Fragment>
             ) : (
@@ -174,3 +270,15 @@ export default class SignupForm extends Component {
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+  return {
+    user: reduxState.user.user
+  };
+}
+
+export default connect(mapStateToProps, {
+  userSignUp,
+  userProfileSignUp,
+  userAddressSignUp
+})(SignupForm);
