@@ -42,10 +42,8 @@ export default function ButtonAppBar() {
             Become a cook
           </Link>
           <Link className="navbar-link" to="/signin">
-            SignUp
+            SignIn
           </Link>
-          {/* <Button color="inherit">Become a cook</Button>
-          <Button color="inherit">SignIn</Button> */}
         </Toolbar>
       </AppBar>
     </div>

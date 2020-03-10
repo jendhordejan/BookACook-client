@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import shadows from "@material-ui/core/styles/shadows";
 
 const useStyles = makeStyles(theme => ({
   mainFeaturedPost: {
@@ -34,7 +35,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(25),
       paddingRight: 0
-    }
+    },
+    shadows: (theme.shadows = ["2px 2px #000"])
   },
 
   root: {
@@ -48,7 +50,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3)
   },
   textField: {
-    width: 200
+    width: 200,
+    shadows: ["2px 2px #000"]
   },
   multilineColor: {
     color: "white"
@@ -106,7 +109,12 @@ export default function MainFeaturedPost(props) {
                 Search
               </Button>
             </FormControl>
-            <Typography variant="h5" color="inherit" paragraph>
+            <Typography
+              variant="h5"
+              color="inherit"
+              paragraph
+              style={{ textShadow: "2px 2px #000" }}
+            >
               {post.description}
             </Typography>
           </div>
