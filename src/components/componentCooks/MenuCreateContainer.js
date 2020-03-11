@@ -18,6 +18,8 @@ import Typography from "@material-ui/core/Typography";
 
 //components
 import MenuCreateForm from "./MenuCreateForm";
+import AboutYourMenu from "./AboutYourMenu";
+import AddDish from "./AddDish";
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -141,10 +143,10 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <HourglassEmptyIcon />,
-    2: <RestaurantMenuIcon />,
-    3: <FastfoodIcon />,
-    4: <RateReviewIcon />
+    // 1: <HourglassEmptyIcon />,
+    1: <RestaurantMenuIcon />,
+    2: <FastfoodIcon />,
+    3: <RateReviewIcon />
   };
 
   return (
@@ -179,23 +181,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return [
-    "Let's get started",
-    "About your Menu",
-    "Add dish",
-    "Review & Publish"
-  ];
+  return ["About your Menu", "Add dish", "Review & Publish"];
 }
 
-function getStepContent(step) {
+function getStepContent(step, stateValues, handleChange) {
   //this is where you call each component to handle each step
   switch (step) {
     case 0:
-      return <MenuCreateForm />;
+      return (
+        <AboutYourMenu stateValues={stateValues} handleChange={handleChange} />
+      );
     case 1:
-      return "Tell us something about your menu";
-    case 2:
-      return "Let's add some dishes to your menu";
+      return <AddDish stateValues={stateValues} handleChange={handleChange} />;
+
     default:
       return "Review and publish your menu";
   }
@@ -203,7 +201,44 @@ function getStepContent(step) {
 
 export default function MenuCreateContainer() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  // state for AboutYourMenu
+  const [menuTitle, setMenuTitle] = React.useState("Authentic Menu");
+  const [menuDescription, setMenuDescription] = React.useState(
+    "Some Description"
+  );
+  // state for AddDish
+  const [category, setCategory] = React.useState("Asian");
+  const [dishes, setDishes] = React.useState([
+    {
+      title: "Tom Yum Goong (Spicy Shrimp Soup)",
+      price: 7.0,
+      description:
+        "The unique flavor of this soup – rightfully famous all over the world – is achieved by the combination of fragrant lemongrass, kaffir lime leaves, shallots, lime juice, fish sauce, fresh chilies (or chili paste), and fat juicy prawns. Its fresh and rich exotic flavor instinctively sets your definition of the flavor of Thailand!",
+      image:
+        "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/tom-yum-goong.webp",
+      imageText: "Image Text"
+    }
+  ]);
+
+  const dish1 = {
+    title: "Pad Thai (Thai-Style Fried Noodles)",
+    price: 7.0,
+    description:
+      "A signature dish in Thailand, pad Thai is supposed be on the menu of every restaurant in Thailand, from noisy street stalls to Michelin-starred restaurants in Bangkok. It comprises rice noodles (thin or wide) stir-fried with extravagant amounts of fresh prawns, crunchy bean sprouts, eggs, tasty tofu cubes, onion, and finely grated peanuts. A squirt of lime juice will complete the dish before it thrills every taste bud in your mouth.",
+    image:
+      "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/pad-thai.webp",
+    imageText: "Image Text"
+  };
+
+  const stateValues = {
+    category,
+    menuTitle,
+    menuDescription,
+    dishes
+  };
+
   const steps = getSteps();
 
   const handleNext = () => {
@@ -218,8 +253,25 @@ export default function MenuCreateContainer() {
     setActiveStep(0);
   };
 
+  const handleChange = event => {
+    switch (event.target.name) {
+      case "category":
+        setCategory(event.target.value);
+        break;
+      case "menuTitle":
+        setMenuTitle(event.target.value);
+        break;
+      case "menuDescription":
+        setMenuDescription(event.target.value);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={classes.root}>
+      {console.log("MenuCreateContainer.checkState Values: ", stateValues)}
       <Stepper
         alternativeLabel
         activeStep={activeStep}
@@ -245,7 +297,7 @@ export default function MenuCreateContainer() {
         ) : (
           <div>
             <Typography className={classes.instructions}>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, stateValues, handleChange)}
             </Typography>
             <div>
               <Button
