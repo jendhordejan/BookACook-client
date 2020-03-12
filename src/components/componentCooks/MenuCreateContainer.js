@@ -66,6 +66,83 @@ const useQontoStepIconStyles = makeStyles({
     fontSize: 18
   }
 });
+//Style for AddDish
+const useStylesAddDish = makeStyles(theme => ({
+  root: {
+    height: "80vh"
+  },
+
+  image: {
+    backgroundImage:
+      "url(https://www.onceuponachef.com/images/2017/02/Asian-Vegetable-Stir-Fry-3-760x547.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.grey[900]
+        : theme.palette.grey[50],
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  },
+  fab: {
+    margin: theme.spacing(20)
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  }
+}));
+//style for AboutYourMenu
+const useStylesAYM = makeStyles(theme => ({
+  root: {
+    height: "80vh"
+  },
+
+  image: {
+    backgroundImage:
+      "url(https://marketingplatform.vivial.net/sites/default/files/inline_images/Depositphotos_48602647_l-2015%20%281%29.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.grey[900]
+        : theme.palette.grey[50],
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  }
+}));
 
 function QontoStepIcon(props) {
   const classes = useQontoStepIconStyles();
@@ -91,7 +168,7 @@ QontoStepIcon.propTypes = {
   completed: PropTypes.bool
 };
 
-const ColorlibConnector = withStyles({
+export const ColorlibConnector = withStyles({
   alternativeLabel: {
     top: 22
   },
@@ -138,7 +215,7 @@ const useColorlibStepIconStyles = makeStyles({
   }
 });
 
-function ColorlibStepIcon(props) {
+export function ColorlibStepIcon(props) {
   const classes = useColorlibStepIconStyles();
   const { active, completed } = props;
 
@@ -180,145 +257,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function getSteps() {
-  return ["About your Menu", "Add dish", "Review & Publish"];
-}
-
-function getStepContent(step, stateValues, handleChange) {
-  //this is where you call each component to handle each step
-  switch (step) {
-    case 0:
-      return (
-        <AboutYourMenu stateValues={stateValues} handleChange={handleChange} />
-      );
-    case 1:
-      return <AddDish stateValues={stateValues} handleChange={handleChange} />;
-
-    default:
-      return "Review and publish your menu";
-  }
-}
-
 export default function MenuCreateContainer() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  // state for AboutYourMenu
-  const [menuTitle, setMenuTitle] = React.useState("Authentic Menu");
-  const [menuDescription, setMenuDescription] = React.useState(
-    "Some Description"
-  );
-  // state for AddDish
-  const [category, setCategory] = React.useState("Asian");
-  const [dishes, setDishes] = React.useState([
-    {
-      title: "Tom Yum Goong (Spicy Shrimp Soup)",
-      price: 7.0,
-      description:
-        "The unique flavor of this soup – rightfully famous all over the world – is achieved by the combination of fragrant lemongrass, kaffir lime leaves, shallots, lime juice, fish sauce, fresh chilies (or chili paste), and fat juicy prawns. Its fresh and rich exotic flavor instinctively sets your definition of the flavor of Thailand!",
-      image:
-        "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/tom-yum-goong.webp",
-      imageText: "Image Text"
-    }
-  ]);
-
-  const dish1 = {
-    title: "Pad Thai (Thai-Style Fried Noodles)",
-    price: 7.0,
-    description:
-      "A signature dish in Thailand, pad Thai is supposed be on the menu of every restaurant in Thailand, from noisy street stalls to Michelin-starred restaurants in Bangkok. It comprises rice noodles (thin or wide) stir-fried with extravagant amounts of fresh prawns, crunchy bean sprouts, eggs, tasty tofu cubes, onion, and finely grated peanuts. A squirt of lime juice will complete the dish before it thrills every taste bud in your mouth.",
-    image:
-      "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/pad-thai.webp",
-    imageText: "Image Text"
-  };
-
-  const stateValues = {
-    category,
-    menuTitle,
-    menuDescription,
-    dishes
-  };
-
-  const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  const handleChange = event => {
-    switch (event.target.name) {
-      case "category":
-        setCategory(event.target.value);
-        break;
-      case "menuTitle":
-        setMenuTitle(event.target.value);
-        break;
-      case "menuDescription":
-        setMenuDescription(event.target.value);
-        break;
-      default:
-        break;
-    }
-  };
+  const classesAddDish = useStylesAddDish(); //new
+  const classesAYM = useStylesAYM();
 
   return (
-    <div className={classes.root}>
-      {console.log("MenuCreateContainer.checkState Values: ", stateValues)}
-      <Stepper
-        alternativeLabel
-        activeStep={activeStep}
-        connector={<ColorlibConnector />}
-      >
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              You have successfully created a menu - would you like to create a
-              new menu?
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Let's create another menu
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep, stateValues, handleChange)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                Back
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? "Publish" : "Next"}
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
+    <div>
+      <MenuCreateForm
+        classes={classes}
+        classesAddDish={classesAddDish}
+        classesAYM={classesAYM}
+        useQontoStepIconStyles={useQontoStepIconStyles}
+      />
     </div>
   );
 }

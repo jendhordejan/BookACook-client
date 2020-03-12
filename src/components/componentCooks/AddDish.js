@@ -15,56 +15,56 @@ import DishListContainer from "./DishListContainer";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: "80vh"
-  },
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     height: "80vh"
+//   },
 
-  image: {
-    backgroundImage:
-      "url(https://www.onceuponachef.com/images/2017/02/Asian-Vegetable-Stir-Fry-3-760x547.jpg)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center"
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  fab: {
-    margin: theme.spacing(20)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-}));
+//   image: {
+//     backgroundImage:
+//       "url(https://www.onceuponachef.com/images/2017/02/Asian-Vegetable-Stir-Fry-3-760x547.jpg)",
+//     backgroundRepeat: "no-repeat",
+//     backgroundColor:
+//       theme.palette.type === "dark"
+//         ? theme.palette.grey[900]
+//         : theme.palette.grey[50],
+//     backgroundSize: "cover",
+//     backgroundPosition: "center"
+//   },
+//   paper: {
+//     margin: theme.spacing(8, 4),
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center"
+//   },
+//   avatar: {
+//     margin: theme.spacing(1),
+//     backgroundColor: theme.palette.secondary.main
+//   },
+//   form: {
+//     width: "100%", // Fix IE 11 issue.
+//     marginTop: theme.spacing(1)
+//   },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2)
+//   },
+//   fab: {
+//     margin: theme.spacing(20)
+//   },
+//   formControl: {
+//     margin: theme.spacing(1),
+//     minWidth: 120
+//   },
+//   selectEmpty: {
+//     marginTop: theme.spacing(2)
+//   }
+// }));
 
-export default function MenuCreateForm(props) {
-  const classes = useStyles();
+export default function AddDish(props) {
   const { category, menuTitle, menuDescription, dishes } = props.stateValues;
+  const { classes } = props;
+  //   const classes = useStyles();
 
-  console.log("image VALUE: ", classes.image);
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -77,7 +77,7 @@ export default function MenuCreateForm(props) {
         elevation={6}
         square
       >
-        <DishListContainer dishes={dishes} />
+        <DishListContainer dishes={dishes} classes={classes} />
       </Grid>
 
       <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
