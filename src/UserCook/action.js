@@ -1,24 +1,27 @@
-import axios from "axios";
+import instance from "../axios";
+
 export const USER_SIGNED_UP = "user/SIGNED_UP";
 export const USERPROFILE_SIGNED_UP = "userProfile/SIGNED_UP";
 export const USERADDRESS_SIGNED_UP = "userAddress/SIGNED_UP";
 
-const baseUrl = "http://localhost:5000";
+export const LOGIN_SUCCESS = "user/LOGIN_SUCCESS";
 
 // signup - table: user
 export function userSignUp(userData) {
   return async (dispatch, getState) => {
+    console.log("INSTANCE: ", instance);
     try {
-      const responseData = await axios.post(`${baseUrl}/user/signup`, userData);
+      const responseData = await instance.post(`/user/signup`, userData);
+      // axios.post(`${baseUrl}/user/signup`, userData);
 
-      dispatch(userSignUp_Sucess(responseData.data));
+      dispatch(userSignUpSucess(responseData.data));
     } catch (error) {
       throw error;
     }
   };
 }
 
-function userSignUp_Sucess(respData) {
+function userSignUpSucess(respData) {
   return {
     type: USER_SIGNED_UP,
     payload: respData
@@ -29,19 +32,19 @@ function userSignUp_Sucess(respData) {
 export function userProfileSignUp(userProfileData) {
   return async (dispatch, getState) => {
     try {
-      const responseData = await axios.post(
-        `${baseUrl}/userprofile/signup`,
+      const responseData = await instance.post(
+        `/userprofile/signup`,
         userProfileData
       );
 
-      dispatch(userProfileSignUp_Sucess(responseData.data));
+      dispatch(userProfileSignUpSucess(responseData.data));
     } catch (error) {
       throw error;
     }
   };
 }
 
-function userProfileSignUp_Sucess(respData) {
+function userProfileSignUpSucess(respData) {
   return {
     type: USERPROFILE_SIGNED_UP,
     payload: respData
@@ -54,22 +57,47 @@ export function userAddressSignUp(userAddressData) {
 
   return async (dispatch, getState) => {
     try {
-      const responseData = await axios.post(
-        `${baseUrl}/useraddress/signup`,
+      const responseData = await instance.post(
+        `/useraddress/signup`,
         userAddressData
       );
 
-      dispatch(userAddressSignUp_Sucess(responseData.data));
+      dispatch(userAddressSignUpSucess(responseData.data));
     } catch (error) {
       throw error;
     }
   };
 }
 
-function userAddressSignUp_Sucess(respData) {
+function userAddressSignUpSucess(respData) {
   console.log("respData: ", respData);
   return {
     type: USERADDRESS_SIGNED_UP,
+    payload: respData
+  };
+}
+
+// signup - table: user_address
+export function userLogin(userLoginData, history) {
+  console.log("userLoginData: ", userLoginData);
+
+  return async (dispatch, getState) => {
+    try {
+      const responseData = await instance.post(`/user/login`, userLoginData);
+
+      console.log("responseData: ", responseData);
+      dispatch(userLoginSucess(responseData.data));
+      history.push("/dashboard");
+    } catch (error) {
+      throw error;
+    }
+  };
+}
+
+function userLoginSucess(respData) {
+  console.log("respData in userLoginSuccess: ", respData);
+  return {
+    type: LOGIN_SUCCESS,
     payload: respData
   };
 }

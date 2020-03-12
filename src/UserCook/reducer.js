@@ -1,7 +1,8 @@
 import {
   USER_SIGNED_UP,
   USERPROFILE_SIGNED_UP,
-  USERADDRESS_SIGNED_UP
+  USERADDRESS_SIGNED_UP,
+  LOGIN_SUCCESS
 } from "./action";
 
 const initialState = {
@@ -19,6 +20,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, userProfile: payload.userProfile };
     case USERADDRESS_SIGNED_UP:
       return { ...state, userAddress: payload.userAddress };
+    case LOGIN_SUCCESS:
+      return { ...state, jwt: payload.user.token, user: payload.user };
     default:
       return state;
   }

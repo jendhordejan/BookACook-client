@@ -64,14 +64,7 @@ export default function Dashboard() {
   return (
     <React.Fragment>
       <CssBaseline />
-      {/* <AppBar position="relative">
-        <Toolbar>
-          <CameraIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
+
       <main>
         {/* Hero unit */}
         <div
@@ -101,7 +94,11 @@ export default function Dashboard() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href="/menucreate"
+                  >
                     Create a Menu
                   </Button>
                 </Grid>

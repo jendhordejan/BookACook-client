@@ -12,16 +12,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
 export default class AboutYourMenu extends Component {
-  // state = {
-  //   category: "Asian",
-  //   menuTitle: "Authentic Menu Title",
-  //   menuDescription: "sample description"
-  // };
-
   render() {
-    const { classes, classesAddDish, classesAYM } = this.props;
+    const { classes } = this.props;
 
-    const { category, menuTitle, menuDescription } = this.props.stateValues;
+    const { menuTitle, menuDescription } = this.props.stateValues;
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
@@ -36,18 +30,6 @@ export default class AboutYourMenu extends Component {
             </Typography>
 
             <form className={classes.form} noValidate>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="category"
-                required
-                value={category}
-                onChange={this.props.handleChange}
-              >
-                <MenuItem value={"Asian"}>Asian</MenuItem>
-                <MenuItem value={"French"}>French</MenuItem>
-                <MenuItem value={"Italian"}>Italian</MenuItem>
-              </Select>
               <Typography component="h1" variant="h6">
                 Give a title to your menu.
               </Typography>
@@ -72,7 +54,7 @@ export default class AboutYourMenu extends Component {
                 required
                 fullWidth
                 multiline
-                rows="2"
+                rows="3"
                 name="menuDescription"
                 label="description"
                 type="menuDescription"
