@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+// Material UI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -8,11 +10,12 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
+//functions
+import { userLogin } from "../UserCook/action";
 
-export default class SignInForm extends Component {
+class SignInForm extends Component {
   state = {
     email: "jendhordejan@gmail.com",
     password: "password"
@@ -28,6 +31,16 @@ export default class SignInForm extends Component {
     console.log("state is", this.state);
   };
 
+  handleSubmit = async event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+
+    const userLoginData = { email, password };
+    console.log("HANDLESUBMIT userLoginData", userLoginData);
+
+    await this.props.userLogin(userLoginData, this.props.history);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -39,7 +52,11 @@ export default class SignInForm extends Component {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            onSubmit={this.handleSubmit}
+            // noValidate
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -76,7 +93,7 @@ export default class SignInForm extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="/Home"
+              href=""
             >
               Sign In
             </Button>
@@ -98,3 +115,5 @@ export default class SignInForm extends Component {
     );
   }
 }
+
+export default withRouter(connect("", { userLogin })(SignInForm));

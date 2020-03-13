@@ -1,142 +1,237 @@
-// import React from "react";
-// import Avatar from "@material-ui/core/Avatar";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
-// import CssBaseline from "@material-ui/core/CssBaseline";
-// import TextField from "@material-ui/core/TextField";
-// import Paper from "@material-ui/core/Paper";
-// import Grid from "@material-ui/core/Grid";
-// import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
-// import Typography from "@material-ui/core/Typography";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import FormControl from "@material-ui/core/FormControl";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+//Material UI icons
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-// import Select from "@material-ui/core/Select";
-// import { makeStyles } from "@material-ui/core/styles";
+//components
+import AboutYourMenu from "./AboutYourMenu";
+import AddDishComponent from "./AddDish";
+import ReviewPublish from "./ReviewPublish";
 
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     height: "60vh"
-//   },
+//functions
+import { ColorlibConnector, ColorlibStepIcon } from "./MenuCreateContainer";
 
-//   image: {
-//     backgroundImage:
-//       "url(https://www.sydneycommercialkitchens.com.au/images/blog/PREPARATION.jpg)",
-//     backgroundRepeat: "no-repeat",
-//     backgroundColor:
-//       theme.palette.type === "dark"
-//         ? theme.palette.grey[900]
-//         : theme.palette.grey[50],
-//     backgroundSize: "cover",
-//     backgroundPosition: "center"
-//   },
-//   paper: {
-//     margin: theme.spacing(8, 4),
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center"
-//   },
-//   avatar: {
-//     margin: theme.spacing(1),
-//     backgroundColor: theme.palette.secondary.main
-//   },
-//   form: {
-//     width: "100%", // Fix IE 11 issue.
-//     marginTop: theme.spacing(1),
-//     height: "20vh"
-//   },
-//   submit: {
-//     margin: theme.spacing(3, 0, 2)
-//   },
-//   fab: {
-//     margin: theme.spacing(20)
-//   },
-//   formControl: {
-//     margin: theme.spacing(1),
-//     minWidth: 120
-//   },
-//   selectEmpty: {
-//     marginTop: theme.spacing(2)
-//   }
-// }));
+//action functions
+import { menuCreate } from "../../Menu/action";
+import { dishCreate } from "../../Dish/action";
 
-// export default function MenuCreateForm(props) {
-//   const classes = useStyles();
-//   const { category, servings, price } = props.stateValues;
-//   return (
-//     <Grid container component="main" className={classes.root}>
-//       <CssBaseline />
-//       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-//       <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
-//         <div className={classes.paper}>
-//           <Avatar className={classes.avatar}>
-//             <HourglassEmptyIcon />
-//           </Avatar>
-//           <Typography component="h1" variant="h6">
-//             Let's start creating your menu.
-//           </Typography>
-//           <form className={classes.form} noValidate>
-//             <Typography component="h1" variant="h6">
-//               What kind of menu is this?
-//             </Typography>
-//             <FormControl className={classes.formControl}>
-//               <InputLabel id="demo-simple-select-label">Category</InputLabel>
-//               <Select
-//                 labelId="demo-simple-select-label"
-//                 id="demo-simple-select"
-//                 name="category"
-//                 required
-//                 value={category}
-//                 onChange={props.handleChange}
-//               >
-//                 <MenuItem value={"Asian"}>Asian</MenuItem>
-//                 <MenuItem value={"French"}>French</MenuItem>
-//                 <MenuItem value={"Italian"}>Italian</MenuItem>
-//               </Select>
-//               {console.log(
-//                 `check AFTER CHANGE state:
-//                 category: ${category}
-//                 servings: ${servings}
-//                 price: ${price}`
-//               )}
-//             </FormControl>
-//             <FormControl className={classes.formControl}>
-//               <InputLabel id="demo-simple-select-label">Servings</InputLabel>
-//               <Select
-//                 labelId="demo-simple-select-label"
-//                 id="demo-simple-select"
-//                 name="servings"
-//                 required
-//                 value={servings}
-//                 onChange={props.handleChange}
-//               >
-//                 <MenuItem value={1}>1</MenuItem>
-//                 <MenuItem value={2}>2</MenuItem>
-//                 <MenuItem value={3}>3</MenuItem>
-//                 <MenuItem value={4}>4</MenuItem>
-//                 <MenuItem value={5}>5</MenuItem>
-//                 <MenuItem value={6}>6</MenuItem>
-//               </Select>
-//             </FormControl>
+class MenuCreateForm extends Component {
+  state = {
+    activeStep: 0,
 
-//             {/* <TextField
-//               variant="outlined"
-//               margin="normal"
-//               required
-//               fullWidth
-//               name="price"
-//               label="Price (€) per person"
-//               type="price"
-//               id="price"
-//               value={price}
-//               onChange={props.handleChange}
-//             />
-//             <Typography component="h1" variant="h6">
-//               Total Price for this Menu: € {price * servings}
-//             </Typography> */}
-//           </form>
-//         </div>
-//       </Grid>
-//     </Grid>
-//   );
-// }
+    //state for About Your Meal
+    // category: "Italian",
+    menuTitle: "Authentic Italian Title",
+    menuDescription: "some sample Italian description",
+
+    //state for Add Dish
+    dishes: [
+      {
+        title: "Tom Yum Goong (Spicy Shrimp Soup)",
+        category: "Thai",
+        price: 7.0,
+        description:
+          "The unique flavor of this soup – rightfully famous all over the world – is achieved by the combination of fragrant lemongrass, kaffir lime leaves, shallots, lime juice, fish sauce, fresh chilies (or chili paste), and fat juicy prawns. Its fresh and rich exotic flavor instinctively sets your definition of the flavor of Thailand!",
+        image:
+          "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/tom-yum-goong.webp"
+      },
+      {
+        title: "Pad Thai (Thai-Style Fried Noodles)",
+        category: "Thai",
+        price: 7.0,
+        description:
+          "A signature dish in Thailand, pad Thai is supposed be on the menu of every restaurant in Thailand, from noisy street stalls to Michelin-starred restaurants in Bangkok. It comprises rice noodles (thin or wide) stir-fried with extravagant amounts of fresh prawns, crunchy bean sprouts, eggs, tasty tofu cubes, onion, and finely grated peanuts. A squirt of lime juice will complete the dish before it thrills every taste bud in your mouth.",
+        image:
+          "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/pad-thai.webp"
+      }
+    ]
+  };
+
+  render() {
+    function getSteps() {
+      return ["About your Menu", "Add dish", "Review & Publish"];
+    }
+
+    const handleAddNewDish = dish => {
+      console.log("INSIDE handleAddNewDish", this.state);
+      this.setState({
+        dishes: [...this.state.dishes, dish]
+      });
+    };
+
+    function getStepContent(
+      step,
+      stateValues,
+      handleChange,
+      classesAYM,
+      classesAddDish
+    ) {
+      //this is where you call each component to handle each step
+      switch (step) {
+        case 0:
+          return (
+            <AboutYourMenu
+              stateValues={stateValues}
+              classesAddDish={classesAddDish}
+              classes={classesAYM}
+              handleChange={handleChange}
+            />
+          );
+        case 1:
+          return (
+            <AddDishComponent
+              stateValues={stateValues}
+              handleChange={handleChange}
+              classes={classesAddDish}
+              handleAddNewDish={handleAddNewDish}
+            />
+          );
+
+        default:
+          return (
+            <ReviewPublish stateValues={stateValues} classes={classesAYM} />
+          );
+      }
+    }
+
+    const steps = getSteps();
+
+    const handleNext = () => {
+      if (this.state.activeStep === steps.length - 1) {
+        console.log("Let's submit");
+        handleSubmit(this.state);
+      }
+      this.setState({ activeStep: this.state.activeStep + 1 });
+    };
+
+    const handleBack = () => {
+      this.setState({ activeStep: this.state.activeStep - 1 });
+    };
+
+    const handleReset = () => {
+      this.setState({ activeStep: 0 });
+    };
+
+    const handleChange = event => {
+      const { value } = event.target;
+      console.log("value in handleChange:", value);
+      console.log(event);
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+      console.log("state is", this.state);
+    };
+
+    const handleSubmit = async state => {
+      console.log("INSIDE handleSubmit. Let's check the local: ", state);
+
+      const { menuTitle, menuDescription } = state;
+      const newMenu = { title: menuTitle, description: menuDescription };
+
+      await this.props.menuCreate(newMenu);
+
+      const { dishes } = state;
+
+      console.log(
+        "AFTER MENU CREATION DISPATCH: this.props.newMenu ID",
+        this.props.newMenuId
+      );
+
+      console.log("handleSubmit dishes data: ", dishes);
+
+      dishes.map(async dishItem => {
+        console.log("dish Item: ", dishItem);
+
+        const menuId = this.props.newMenuId;
+        const newDishItem = { ...dishItem, menuId };
+
+        console.log("dishItem WITH menuID: ", newDishItem);
+
+        await this.props.dishCreate(newDishItem);
+        this.props.history.push("/dashboard");
+      });
+    };
+
+    const { classes, classesAddDish, classesAYM } = this.props;
+
+    return (
+      <div className={classes.root}>
+        {console.log("MenuCreateContainer.checkState Values: ", this.state)}
+        <Stepper
+          alternativeLabel
+          activeStep={this.state.activeStep}
+          connector={<ColorlibConnector />}
+        >
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel StepIconComponent={ColorlibStepIcon}>
+                {label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <div>
+          {this.state.activeStep === steps.length ? (
+            <div>
+              <Typography className={classes.instructions}>
+                You have successfully created a menu - would you like to create
+                a new menu?
+              </Typography>
+              <Button onClick={handleReset} className={classes.button}>
+                Let's create another menu
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Typography className={classes.instructions}>
+                {getStepContent(
+                  this.state.activeStep,
+                  this.state,
+                  handleChange,
+                  classesAYM,
+                  classesAddDish
+                )}
+              </Typography>
+              <div>
+                <Button
+                  disabled={this.state.activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.button}
+                >
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  {this.state.activeStep === steps.length - 1
+                    ? "Publish"
+                    : "Next"}
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(reduxState) {
+  return {
+    user: reduxState.user.user,
+    newMenuId: reduxState.menus.newMenu.id
+  };
+}
+
+export default withRouter(
+  connect(mapStateToProps, { menuCreate, dishCreate })(MenuCreateForm)
+);

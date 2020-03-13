@@ -1,6 +1,6 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
+import React, { Component } from "react";
 
+import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
@@ -10,145 +10,184 @@ import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import Hidden from "@material-ui/core/Hidden";
+
 import DishListContainer from "./DishListContainer";
 
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
+export default class AddDish extends Component {
+  state = {
+    name: "dish name",
+    category: "Thai",
+    description: "dish local description",
+    price: 0,
+    imageUrl: "https://source.unsplash.com/random"
+  };
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: "80vh"
-  },
+  render() {
+    const { dishes } = this.props.stateValues;
+    const { classes, handleAddNewDish } = this.props;
 
-  image: {
-    backgroundImage:
-      "url(https://www.onceuponachef.com/images/2017/02/Asian-Vegetable-Stir-Fry-3-760x547.jpg)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center"
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  fab: {
-    margin: theme.spacing(20)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-}));
+    const handleChange = event => {
+      //   const { value } = event.target;
+      console.log(
+        `value in handleChange... eventname: ${event.target.name} | value:  ${event.target.value}`
+      );
+      //   console.log(event);
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    };
 
-export default function MenuCreateForm(props) {
-  const classes = useStyles();
-  const { category, menuTitle, menuDescription, dishes } = props.stateValues;
+    return (
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        {console.log("state is", this.state)}
+        <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
+          {/*  Card Section  */}
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <RestaurantMenuIcon />
+            </Avatar>
 
-  console.log("image VALUE: ", classes.image);
-  return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={7}
-        md={7}
-        component={Paper}
-        elevation={6}
-        square
-      >
-        <DishListContainer dishes={dishes} />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <RestaurantMenuIcon />
-          </Avatar>
-          <Typography component="h1" variant="h6">
-            Let's add some dishes to your menu
-          </Typography>
-
-          <form className={classes.form} noValidate>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="category"
-                required
-                value={category}
-                onChange={props.handleChange}
-              >
-                <MenuItem value={"Asian"}>Asian</MenuItem>
-                <MenuItem value={"French"}>French</MenuItem>
-                <MenuItem value={"Italian"}>Italian</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="menuTitle"
-              label="Dish Name"
-              type="menuTitle"
-              id="menuTitle"
-              value={menuTitle}
-              onChange={props.handleChange}
-            />
             <Typography component="h1" variant="h6">
-              Name your dish and make us crave for it.
+              Let's add some dishes to your menu
             </Typography>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
+
+            <CardActionArea component="a" href="#">
+              <Card
+                className="card"
+                style={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column"
+                }}
+              >
+                <CardMedia
+                  className="cardMedia"
+                  style={{
+                    paddingTop: "56.25%" // 16:9
+                  }}
+                  image={this.state.imageUrl}
+                />
+              </Card>
+            </CardActionArea>
+            <CardContent
+              className="cardContent"
+              style={{
+                flexGrow: 1
+              }}
+            >
+              <CardActions>
+                <Button size="small" color="primary">
+                  import
+                </Button>
+              </CardActions>
+
+              <FormControl className={classes.formControl} fullWidth>
+                {/* Category */}
+                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="category"
+                  required
+                  value={this.state.category}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"Asian"}>Asian</MenuItem>
+                  <MenuItem value={"French"}>French</MenuItem>
+                  <MenuItem value={"Italian"}>Italian</MenuItem>
+                </Select>
+                {/* Dish Name */}
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="name"
+                  label="Dish Name"
+                  type="name"
+                  id="name"
+                  value={this.state.name}
+                  onChange={handleChange}
+                />
+                <Typography component="h1" variant="h6">
+                  Name your dish and make us crave for it.
+                </Typography>
+                {/* Dish Description */}
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  multiline
+                  rows="4"
+                  name="description"
+                  label="description"
+                  type="description"
+                  id="description"
+                  value={this.state.description}
+                  onChange={handleChange}
+                />
+                {/* Price */}
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="price"
+                  label="Price"
+                  type="price"
+                  id="price"
+                  value={this.state.price}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </CardContent>
+
+            <Button
+              variant="contained"
+              color="primary"
               fullWidth
-              multiline
-              rows="4"
-              name="menuDescription"
-              label="description"
-              type="menuDescription"
-              id="menuDescription"
-              value={menuDescription}
-              onChange={props.handleChange}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="menuTitle"
-              label="Price"
-              type="menuTitle"
-              id="menuTitle"
-              value={menuTitle}
-              onChange={props.handleChange}
-            />
-          </form>
-        </div>
+              onClick={() => {
+                //this is just for testing
+                const dish = {
+                  title: this.state.name,
+                  category: this.state.category,
+                  price: this.state.price,
+                  description: this.state.description,
+                  image: this.state.imageUrl
+                };
+                handleAddNewDish(dish);
+              }}
+              className={classes.button}
+            >
+              Add
+            </Button>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={false}
+          sm={7}
+          md={7}
+          component={Paper}
+          elevation={6}
+          square
+        >
+          <Grid item xs={12} md={12}>
+            {/*  Grid for displaying added dishes */}
+            <DishListContainer dishes={dishes} classes={classes} />
+          </Grid>
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
+  }
 }
