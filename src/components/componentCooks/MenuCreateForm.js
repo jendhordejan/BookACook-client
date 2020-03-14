@@ -126,6 +126,7 @@ class MenuCreateForm extends Component {
 
     const handleSubmit = async state => {
       const { menuTitle, menuDescription } = state;
+
       const newMenu = { title: menuTitle, description: menuDescription };
 
       await this.props.menuCreate(newMenu);
@@ -145,6 +146,7 @@ class MenuCreateForm extends Component {
 
     return (
       <div className={classes.root}>
+        {console.log("check Redux State User: ", this.props.user)}
         <Stepper
           alternativeLabel
           activeStep={this.state.activeStep}

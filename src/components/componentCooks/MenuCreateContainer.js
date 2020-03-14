@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -257,7 +259,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuCreateContainer() {
+function MenuCreateContainer() {
   const classes = useStyles();
   const classesAddDish = useStylesAddDish(); //new
   const classesAYM = useStylesAYM();
@@ -273,3 +275,5 @@ export default function MenuCreateContainer() {
     </div>
   );
 }
+
+export default connect("")(MenuCreateContainer);

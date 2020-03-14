@@ -92,7 +92,8 @@ export function userLogin(userLoginData, history) {
         return;
       }
       dispatch(userLoginSucess(responseData.data));
-      history.push("/dashboard");
+      console.log("responseData.data.user.id: ", responseData.data.user.id);
+      history.push(`/dashboard/${responseData.data.user.id}`);
     } catch (error) {
       throw error;
     }

@@ -53,11 +53,6 @@ function NavBar() {
           <Button color="inherit" href="/signin">
             Login
           </Button>
-
-          {/* <Avatar
-            alt="Remy Sharp"
-            src={this.props.userAvatar ? this.props.userAvatar : null}
-          /> */}
         </Toolbar>
       </AppBar>
     </div>

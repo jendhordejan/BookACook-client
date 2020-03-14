@@ -8,7 +8,7 @@ import {
 const initialState = {
   jwt: "",
   user: {},
-  userProfile: {},
+  userProfile: { imageUrl: "" },
   userAddress: {}
 };
 
