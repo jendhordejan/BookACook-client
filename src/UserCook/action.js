@@ -86,6 +86,11 @@ export function userLogin(userLoginData, history) {
       const responseData = await instance.post(`/user/login`, userLoginData);
 
       console.log("responseData: ", responseData);
+
+      if (responseData.data.status === 400) {
+        alert(`${responseData.data.message}`);
+        return;
+      }
       dispatch(userLoginSucess(responseData.data));
       history.push("/dashboard");
     } catch (error) {

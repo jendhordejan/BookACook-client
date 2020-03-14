@@ -21,7 +21,13 @@ export default (state = initialState, { type, payload }) => {
     case USERADDRESS_SIGNED_UP:
       return { ...state, userAddress: payload.userAddress };
     case LOGIN_SUCCESS:
-      return { ...state, jwt: payload.user.token, user: payload.user };
+      return {
+        ...state,
+        jwt: payload.user.token,
+        user: payload.user,
+        userProfile: payload.userProfile,
+        userAddress: payload.userAddress
+      };
     default:
       return state;
   }

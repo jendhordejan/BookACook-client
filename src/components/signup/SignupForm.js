@@ -96,6 +96,10 @@ class SignupForm extends Component {
       console.log(
         `handleNext activeStep: ${this.state.activeStep} || steps.length: ${steps.length}`
       );
+      if (this.state.activeStep === 0) {
+        console.log("CHECK PASSWORD AND CONFIRM PASSWORD");
+        // return;
+      }
       if (this.state.activeStep === steps.length - 1) {
         console.log("Let's submit");
         handleSubmit(this.state);

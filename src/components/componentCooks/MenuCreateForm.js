@@ -59,7 +59,6 @@ class MenuCreateForm extends Component {
     }
 
     const handleAddNewDish = dish => {
-      console.log("INSIDE handleAddNewDish", this.state);
       this.setState({
         dishes: [...this.state.dishes, dish]
       });
@@ -104,7 +103,6 @@ class MenuCreateForm extends Component {
 
     const handleNext = () => {
       if (this.state.activeStep === steps.length - 1) {
-        console.log("Let's submit");
         handleSubmit(this.state);
       }
       this.setState({ activeStep: this.state.activeStep + 1 });
@@ -120,17 +118,13 @@ class MenuCreateForm extends Component {
 
     const handleChange = event => {
       const { value } = event.target;
-      console.log("value in handleChange:", value);
-      console.log(event);
+
       this.setState({
         [event.target.name]: event.target.value
       });
-      console.log("state is", this.state);
     };
 
     const handleSubmit = async state => {
-      console.log("INSIDE handleSubmit. Let's check the local: ", state);
-
       const { menuTitle, menuDescription } = state;
       const newMenu = { title: menuTitle, description: menuDescription };
 
@@ -138,20 +132,9 @@ class MenuCreateForm extends Component {
 
       const { dishes } = state;
 
-      console.log(
-        "AFTER MENU CREATION DISPATCH: this.props.newMenu ID",
-        this.props.newMenuId
-      );
-
-      console.log("handleSubmit dishes data: ", dishes);
-
       dishes.map(async dishItem => {
-        console.log("dish Item: ", dishItem);
-
         const menuId = this.props.newMenuId;
         const newDishItem = { ...dishItem, menuId };
-
-        console.log("dishItem WITH menuID: ", newDishItem);
 
         await this.props.dishCreate(newDishItem);
         this.props.history.push("/dashboard");
@@ -162,7 +145,6 @@ class MenuCreateForm extends Component {
 
     return (
       <div className={classes.root}>
-        {console.log("MenuCreateContainer.checkState Values: ", this.state)}
         <Stepper
           alternativeLabel
           activeStep={this.state.activeStep}
