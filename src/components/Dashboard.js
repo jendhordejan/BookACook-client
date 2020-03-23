@@ -69,13 +69,12 @@ function Dashboard(props) {
 
   const handleCreateMenu = () => {
     const { history } = props;
-    history.push("/menucreate");
+    history.push(`/menucreate/${props.match.params.userId}`);
   };
 
   return (
     <React.Fragment>
       <CssBaseline />
-      {console.log("CHECK PARAMS: ", props.match.params.userId)}
       <main>
         {/* Hero unit */}
         <div
@@ -108,7 +107,7 @@ function Dashboard(props) {
                   <Button
                     variant="outlined"
                     color="primary"
-                    /*href="/menucreate"*/ onClick={handleCreateMenu}
+                    onClick={handleCreateMenu}
                   >
                     CREATE MENU
                   </Button>

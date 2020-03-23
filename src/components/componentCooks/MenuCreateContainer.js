@@ -259,21 +259,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MenuCreateContainer() {
+function MenuCreateContainer(props) {
   const classes = useStyles();
   const classesAddDish = useStylesAddDish(); //new
   const classesAYM = useStylesAYM();
 
+  const userId = props.match.params.userId;
   return (
+    // console.log("test: ", props.match.params.userId
+
     <div>
+      {console.log("test: ", props.user.id)}
       <MenuCreateForm
         classes={classes}
         classesAddDish={classesAddDish}
         classesAYM={classesAYM}
         useQontoStepIconStyles={useQontoStepIconStyles}
+        userId={props.user.id}
       />
     </div>
   );
 }
 
-export default connect("")(MenuCreateContainer);
+function mapStateToProps(reduxState, ownProps) {
+  return {
+    user: reduxState.user.user
+  };
+}
+
+export default connect(mapStateToProps)(MenuCreateContainer);

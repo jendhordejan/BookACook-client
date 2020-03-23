@@ -8,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
 import { menuGetByUserId } from "../Menu/action";
-import DishListContainer from "./componentCooks/DishListContainer";
 
 class MenuListContainer extends Component {
   componentDidMount() {
@@ -20,7 +19,7 @@ class MenuListContainer extends Component {
 
     return (
       <Grid container spacing={4}>
-        {console.log("THIS IS THE USER ID: ", userId)}
+        {console.log("MenuListContainer.this.props.menus: ", this.props.menus)}
         {/* {cards.map(card => (
           <Grid item key={card} xs={12} sm={6} md={4}>
             <Card className={classes.card}>

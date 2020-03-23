@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 
@@ -14,19 +14,8 @@ import Dashboard from "./components/Dashboard";
 
 import Footer from "./components/Footer";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 function App() {
-  // const protectedRoute = (Component, routerProps) => {
-  //   const user = this.props.user;
-  //   console.log("protected Route", user);
-  //   return user && user.token ? (
-  //     <Component {...routerProps} />
-  //   ) : (
-  //     <Redirect to="/signin" />
-  //   );
-  // };
-
   return (
     <div className="App">
       <NavBar />
@@ -35,12 +24,8 @@ function App() {
       <Route path="/signin" exact component={SignIn} />
       <Route path="/dashboard/:userId" exact component={Dashboard} />
       {/* <Route path="/menulist/:userId" exact component={MenuListContainer} /> */}
-      <Route path="/menucreate" exact component={MenuCreate} />
-      {/* <Route
-        exact
-        path="/menucreate"
-        render={routerProps => protectedRoute(MenuCreate, routerProps)}
-      /> */}
+      <Route path="/menucreate/:id" exact component={MenuCreate} />
+
       <Footer />
     </div>
   );

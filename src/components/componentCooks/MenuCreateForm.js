@@ -54,6 +54,8 @@ class MenuCreateForm extends Component {
   };
 
   render() {
+    // console.log("MenuCreateForm userId: ", this.props.userId);
+
     function getSteps() {
       return ["About your Menu", "Add dish", "Review & Publish"];
     }
@@ -127,7 +129,11 @@ class MenuCreateForm extends Component {
     const handleSubmit = async state => {
       const { menuTitle, menuDescription } = state;
 
-      const newMenu = { title: menuTitle, description: menuDescription };
+      const newMenu = {
+        title: menuTitle,
+        description: menuDescription,
+        userId: this.props.userId
+      };
 
       await this.props.menuCreate(newMenu);
 
@@ -138,15 +144,15 @@ class MenuCreateForm extends Component {
         const newDishItem = { ...dishItem, menuId };
 
         await this.props.dishCreate(newDishItem);
-        this.props.history.push("/dashboard");
+        this.props.history.push(`/dashboard/${this.props.userId}`);
       });
     };
 
-    const { classes, classesAddDish, classesAYM } = this.props;
+    const { classes, classesAddDish, classesAYM, userId } = this.props;
 
     return (
       <div className={classes.root}>
-        {console.log("check Redux State User: ", this.props.user)}
+        {console.log("check Redux props userId ", userId)}
         <Stepper
           alternativeLabel
           activeStep={this.state.activeStep}
