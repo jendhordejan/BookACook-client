@@ -27,7 +27,6 @@ function menuCreateNewSuccess(respData) {
 }
 
 export function menuGetByUserId(userId) {
-  // console.log("inside menuGetByUserId userId", userId);
   const id = userId;
   return async (dispatch, getState) => {
     try {
