@@ -20,6 +20,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 
 import DishListContainer from "./DishListContainer";
+import UploadImage from "../UploadImage";
 
 export default class AddDish extends Component {
   state = {
@@ -45,12 +46,18 @@ export default class AddDish extends Component {
       });
     };
 
+    const handleUploadImage = async e => {
+      const uploadedImageUrl = await UploadImage(e.target.files);
+      console.log("uploadedImageUrl: ", uploadedImageUrl);
+
+      this.setState({ imageUrl: uploadedImageUrl });
+    };
+
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-        {console.log("state is", this.state)}
+
         <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
-          {/*  Card Section  */}
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <RestaurantMenuIcon />
@@ -60,6 +67,7 @@ export default class AddDish extends Component {
               Let's add some dishes to your menu
             </Typography>
 
+            {/*  Card Section  */}
             <CardActionArea component="a" href="#">
               <Card
                 className="card"
@@ -85,9 +93,16 @@ export default class AddDish extends Component {
               }}
             >
               <CardActions>
-                <Button size="small" color="primary">
-                  import
-                </Button>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="menuTitle"
+                  type="file"
+                  id="file"
+                  onChange={handleUploadImage}
+                />
               </CardActions>
 
               <FormControl className={classes.formControl} fullWidth>

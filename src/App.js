@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 
@@ -8,11 +8,12 @@ import Home from "./components/HomeContainer";
 import SignUpContainer from "./components/signup/SingupContainer";
 import SignIn from "./components/SignInContainer";
 import MenuCreate from "./components/componentCooks/MenuCreateContainer";
+// import MenuListContainer from "./components/MenuListContainer";
 
 import Dashboard from "./components/Dashboard";
 
 import Footer from "./components/Footer";
-// import { Toolbar } from 'material-ui';
+import { connect } from "react-redux";
 
 function App() {
   return (
@@ -21,11 +22,21 @@ function App() {
       <Route path="/" exact component={Home} />
       <Route path="/signup" exact component={SignUpContainer} />
       <Route path="/signin" exact component={SignIn} />
-      <Route path="/dashboard" exact component={Dashboard} />
-      <Route path="/menucreate" exact component={MenuCreate} />
+      <Route path="/dashboard/:userId" exact component={Dashboard} />
+      {/* <Route path="/menulist/:userId" exact component={MenuListContainer} /> */}
+      <Route path="/menucreate/:id" exact component={MenuCreate} />
+
       <Footer />
     </div>
   );
 }
 
-export default App;
+function mapStateToProps(reduxState) {
+  return {
+    user: reduxState.user.user
+  };
+}
+
+//const mapDispatchToProps = {};
+
+export default connect(mapStateToProps)(App);

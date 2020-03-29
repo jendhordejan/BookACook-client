@@ -18,7 +18,7 @@ import { userLogin } from "../UserCook/action";
 class SignInForm extends Component {
   state = {
     email: "jendhordejan@gmail.com",
-    password: "password"
+    password: "pass"
   };
 
   handleChange = event => {

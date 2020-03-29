@@ -1,7 +1,7 @@
-import { MENU_NEW_CREATED } from "./action";
+import { MENU_NEW_CREATED, MENU_ALL_BY_USER } from "./action";
 
 const initialState = {
-  menus: [{ title: "this is title", description: "this desc" }],
+  menus: [],
   newMenu: {}
 };
 
@@ -14,6 +14,14 @@ export default (state = initialState, { type, payload }) => {
         menus: [...state.menus, { ...payload }],
         newMenu: payload
       };
+    case MENU_ALL_BY_USER:
+      console.log("this is the PAYLOD FOR MENU_ALL_BY_USER: ", payload);
+      // return { menus: payload };
+      return {
+        ...state,
+        menus: payload
+      };
+
     default:
       return state;
   }

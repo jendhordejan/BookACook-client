@@ -27,10 +27,10 @@ export default class ReviewSignup extends Component {
                   />
                 </div>
                 <div className={classesProfile.name}>
-                  <h3 className={classesProfile.title}>
+                  <br />
+                  <h2 className={classesProfile.title}>
                     {values.firstName} {values.lastName}
-                  </h3>
-                  <h6>DESIGNER</h6>
+                  </h2>
                 </div>
               </div>
             </GridItem>
@@ -39,29 +39,29 @@ export default class ReviewSignup extends Component {
         <Grid container spacing={3}>
           {/* SignIn Details */}
           <Typography variant="body1">SignIn Details</Typography>
-          <Grid item xs={12} sm={12}>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="body2">Email : {values.email}</Typography>
+          <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} sm={12}>
+              <Typography variant="body1">Email : {values.email}</Typography>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="body2">
+            <Grid item xs={12} sm={12}>
+              <Typography variant="body1">
                 Password : {values.password}
               </Typography>
             </Grid>
           </Grid>
         </Grid>
         <br />
-        <Grid container spacing={3}>
+        <Grid container spacing={5}>
           {/* Address */}
           <Typography variant="body1">Personal Details</Typography>
           <br />
-
+          <br />
           <Grid item xs={12} sm={12}>
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2">Address : {Address}</Typography>
+              <Typography variant="body1">Address : {Address}</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2">About Me: {values.about}</Typography>
+              <Typography variant="body1">About Me: {values.about}</Typography>
             </Grid>
           </Grid>
         </Grid>

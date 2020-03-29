@@ -11,6 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
+import MenuListContainer from "./MenuListContainer";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
+// import { connect } from "react-redux";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -58,13 +64,17 @@ const useStyles = makeStyles(theme => ({
 
 const cards = [1, 2, 3];
 
-export default function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles();
+
+  const handleCreateMenu = () => {
+    const { history } = props;
+    history.push(`/menucreate/${props.match.params.userId}`);
+  };
 
   return (
     <React.Fragment>
       <CssBaseline />
-
       <main>
         {/* Hero unit */}
         <div
@@ -95,11 +105,11 @@ export default function Dashboard() {
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
-                    href="/menucreate"
+                    onClick={handleCreateMenu}
                   >
-                    Create a Menu
+                    CREATE MENU
                   </Button>
                 </Grid>
                 <Grid item>
@@ -111,40 +121,18 @@ export default function Dashboard() {
             </div>
           </Container>
         </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        {/* End hero unit */}
+        <Container className={classes.cardGrid} maxWidth="md"></Container>
+        <MenuListContainer userId={props.match.params.userId} />
       </main>
     </React.Fragment>
   );
 }
+
+function mapStateToProps(reduxState, ownProps) {
+  return {
+    user: reduxState.user.user
+  };
+}
+
+export default connect(mapStateToProps)(Dashboard);

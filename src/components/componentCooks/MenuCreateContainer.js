@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -257,19 +259,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MenuCreateContainer() {
+function MenuCreateContainer(props) {
   const classes = useStyles();
   const classesAddDish = useStylesAddDish(); //new
   const classesAYM = useStylesAYM();
 
+  const userId = props.match.params.userId;
   return (
+    // console.log("test: ", props.match.params.userId
+
     <div>
+      {console.log("test: ", props.user.id)}
       <MenuCreateForm
         classes={classes}
         classesAddDish={classesAddDish}
         classesAYM={classesAYM}
         useQontoStepIconStyles={useQontoStepIconStyles}
+        userId={props.user.id}
       />
     </div>
   );
 }
+
+function mapStateToProps(reduxState, ownProps) {
+  return {
+    user: reduxState.user.user
+  };
+}
+
+export default connect(mapStateToProps)(MenuCreateContainer);

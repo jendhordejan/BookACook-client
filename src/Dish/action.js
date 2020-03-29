@@ -1,6 +1,7 @@
 import instance from "../axios";
 
 export const DISH_NEW_CREATED = "dish/CREATED";
+export const DISH_GET_ALL = "dish/ALL";
 
 //create new menu table: menu
 export function dishCreate(dishData) {
@@ -9,17 +10,26 @@ export function dishCreate(dishData) {
   return async (dispatch, getState) => {
     try {
       const responseData = await instance.post(`/dish`, dishData);
-
-      // dispatch(dishCreateSuccess(responseData.data.menu));
     } catch (error) {
       throw error;
     }
   };
 }
 
-//   function dishCreateSuccess(respData) {
-//     return {
-//       type: MENU_NEW_CREATED,
-//       payload: respData
-//     };
-//   }
+//fetch all dishes component: Dashboard.js
+
+// export function dishGetAll() {
+//   console.log("inside dishGetAll");
+
+//   return async (dispatch, getState) => {
+//     try {
+//       const { dishes } = getState;
+
+//       if (!dishes) {
+//         const responseData = await instance.get()
+//       }
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
+// }

@@ -6,15 +6,14 @@ import Button from "@material-ui/core/Button";
 
 import DishCard from "./DishCard";
 
-export default function DishList(props) {
+export default function DishListContainer(props) {
   const { dishes } = props;
   return (
     <React.Fragment>
       <CssBaseline />
       <Grid container spacing={1}>
-        {dishes.map(dish => (
-          <DishCard key={dish.title} dish={dish} />
-        ))}
+        {dishes &&
+          dishes.map(dish => <DishCard key={dish.title} dish={dish} />)}
       </Grid>
     </React.Fragment>
   );
