@@ -62,8 +62,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const cards = [1, 2, 3];
-
 function Dashboard(props) {
   const classes = useStyles();
 
@@ -122,8 +120,12 @@ function Dashboard(props) {
           </Container>
         </div>
         {/* End hero unit */}
-        <Container className={classes.cardGrid} maxWidth="md"></Container>
-        <MenuListContainer userId={props.match.params.userId} />
+        <Container className={classes.cardGrid} maxWidth="md">
+          <MenuListContainer
+            classes={classes}
+            userId={props.match.params.userId}
+          />
+        </Container>
       </main>
     </React.Fragment>
   );
