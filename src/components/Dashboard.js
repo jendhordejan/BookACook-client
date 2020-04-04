@@ -110,11 +110,11 @@ function Dashboard(props) {
                     CREATE MENU
                   </Button>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Button variant="outlined" color="primary">
                     Secondary action
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
             </div>
           </Container>

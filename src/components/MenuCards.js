@@ -54,7 +54,7 @@ export default function MenuCards(props) {
       {!props.menus && "Loading..."}
       {console.log("menus redux state: ", props.menus)}
       {props.menus.map(menuItem => (
-        <Card className={classes.root}>
+        <Card className={classes.cardMedia}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={classes.avatar}>

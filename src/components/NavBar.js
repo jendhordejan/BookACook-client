@@ -29,11 +29,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NavBar() {
+function NavBar(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      {console.log("NAVBAR USER: ", props.user)}
       <AppBar position="sticky">
         <Toolbar>
           <IconButton
@@ -47,12 +48,21 @@ function NavBar() {
           <Typography variant="h6" className={classes.title}>
             Logo Here
           </Typography>
+          <Button color="inherit" href="/">
+            Home
+          </Button>
           <Button color="inherit" href="/signup">
             Become a cook
           </Button>
-          <Button color="inherit" href="/signin">
-            Login
-          </Button>
+          {!props.user.jwt ? (
+            <Button color="inherit" href="/signin">
+              Login
+            </Button>
+          ) : (
+            <Button color="inherit" href="/signin">
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
@@ -61,7 +71,7 @@ function NavBar() {
 
 function mapStateToProps(reduxState) {
   return {
-    userAvatar: reduxState.user.userProfile.imageUrl
+    user: reduxState.user
   };
 }
 
