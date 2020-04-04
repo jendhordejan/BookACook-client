@@ -6,12 +6,12 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  // console.log(`TYPE: ${type} || PAYLOAD: ${payload}`);
+  console.log(`TYPE: ${type} || MENU PAYLOAD: ${payload}`);
   switch (type) {
     case MENU_NEW_CREATED:
       return {
         ...state,
-        menus: [...state.menus, { ...payload }],
+        menus: [state.menus, { ...payload }],
         newMenu: payload
       };
     case MENU_ALL_BY_USER:
@@ -19,7 +19,7 @@ export default (state = initialState, { type, payload }) => {
       // return { menus: payload };
       return {
         ...state,
-        menus: payload
+        menus: [...state.menus, payload]
       };
 
     default:

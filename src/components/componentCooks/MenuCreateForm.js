@@ -33,22 +33,31 @@ class MenuCreateForm extends Component {
     //state for Add Dish
     dishes: [
       {
-        title: "Tom Yum Goong (Spicy Shrimp Soup)",
-        category: "Thai",
+        title: "Adobo",
+        category: "Filipino",
         price: 7.0,
         description:
-          "The unique flavor of this soup – rightfully famous all over the world – is achieved by the combination of fragrant lemongrass, kaffir lime leaves, shallots, lime juice, fish sauce, fresh chilies (or chili paste), and fat juicy prawns. Its fresh and rich exotic flavor instinctively sets your definition of the flavor of Thailand!",
+          "It’s the Filipino dish everybody knows — the mighty adobo. It is made by stewing meat (usually chicken, pork, or a combination of both) in soy sauce and vinegar, adding peppercorns and bay leaves for that special flavour. Bonus leftovers tip: pull the meat from the bone and fry ’til crispy for some tasty adobo flakes.",
         image:
-          "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/tom-yum-goong.webp"
+          "https://img.theculturetrip.com/1024x/smart/wp-content/uploads/2017/12/33374361143_e5a03d3d1d_k.jpg"
       },
       {
-        title: "Pad Thai (Thai-Style Fried Noodles)",
-        category: "Thai",
+        title: "Kare-Kare",
+        category: "Filipino",
         price: 7.0,
         description:
-          "A signature dish in Thailand, pad Thai is supposed be on the menu of every restaurant in Thailand, from noisy street stalls to Michelin-starred restaurants in Bangkok. It comprises rice noodles (thin or wide) stir-fried with extravagant amounts of fresh prawns, crunchy bean sprouts, eggs, tasty tofu cubes, onion, and finely grated peanuts. A squirt of lime juice will complete the dish before it thrills every taste bud in your mouth.",
+          "This rich stew is made with peanut sauce and, customarily, oxtail, but other meatier cuts of beef can also be added in. Many Filipinos will consider kare-kare incomplete without a serving of bagoong (fermented seafood paste) on the side.",
         image:
-          "https://data.asiahighlights.com/image/travel-guide/thailand/thai-food/pad-thai.webp"
+          "https://img.theculturetrip.com/1024x/smart/wp-content/uploads/2017/12/3494113750_b25ce01e20_b.jpg"
+      },
+      {
+        title: "Sisig",
+        category: "Filipino",
+        price: 7.0,
+        description:
+          "Served sizzling on a hot stone plate, sisig is a favorite pulutan (beer chow) among Filipinos. The meat is primarily chopped up parts of the pigs’ face — in the Philippines, no cut of the animal goes to waste. Some recipes use either mayonnaise or raw egg (to be mixed in while hot) to give it a creamier texture but the classic way is to incorporate pig’s brain into the dish.",
+        image:
+          "https://img.theculturetrip.com/1024x/smart/wp-content/uploads/2017/08/shutterstock_516831739-by-bonchan-1.jpg"
       }
     ]
   };

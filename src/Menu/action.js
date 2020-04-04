@@ -34,7 +34,11 @@ export function menuGetByUserId(userId) {
 
       console.log("menuGetByUserId responseData: ", responseData.data.menus);
 
-      dispatch(menuAllByUser(responseData.data.menus));
+      responseData.data.menus.map(menuData => {
+        console.log("DISPATCH MENUDATA: ", menuData);
+        dispatch(menuAllByUser(menuData));
+      });
+      // dispatch(menuAllByUser(responseData.data.menus));
     } catch (error) {
       throw error;
     }
@@ -42,6 +46,7 @@ export function menuGetByUserId(userId) {
 }
 
 function menuAllByUser(respData) {
+  console.log("respData======>: ", respData);
   return {
     type: MENU_ALL_BY_USER,
     payload: respData

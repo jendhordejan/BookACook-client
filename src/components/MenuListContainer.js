@@ -2,58 +2,35 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import { menuGetByUserId } from "../Menu/action";
+import MenuCards from "./MenuCards";
 
 class MenuListContainer extends Component {
   componentDidMount() {
+    console.log("==========componentDidMount=============");
     this.props.dispatch(menuGetByUserId(this.props.userId));
   }
 
   render() {
     const userId = this.props;
+    const classes = this.props.classes;
 
     return (
-      <Grid container spacing={4}>
-        {console.log("MenuListContainer.this.props.menus: ", this.props.menus)}
-        {/* {cards.map(card => (
-          <Grid item key={card} xs={12} sm={6} md={4}>
-            <Card className={classes.card}>
-              <CardMedia
-                className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
-                title="Image title"
-              />
-              <CardContent className={classes.cardContent}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Heading
-                </Typography>
-                <Typography>
-                  This is a media card. You can use this section to describe the
-                  content.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" color="primary">
-                  View
-                </Button>
-                <Button size="small" color="primary">
-                  Edit
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))} */}
+      <Grid container spacing={10}>
+        {console.log(
+          "MenuListContainer.this.props.menus: ",
+          this.props.menus.menus
+        )}
+        <Grid item xs={12} sm={"auto"} md={12}>
+          <MenuCards menus={this.props.menus.menus} classes={classes} />
+        </Grid>
       </Grid>
     );
   }
 }
 
-function mapStateToProps(reduxState, ownProps) {
+function mapStateToProps(reduxState) {
   return {
     menus: reduxState.menus
   };
