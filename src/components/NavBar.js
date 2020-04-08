@@ -59,7 +59,7 @@ function NavBar(props) {
               Login
             </Button>
           ) : (
-            <Button color="inherit" href="/signin">
+            <Button color="inherit" href="/">
               Logout
             </Button>
           )}
