@@ -29,8 +29,8 @@ This is my own FullStack concept project. This is a website for booking a cook/c
 - **[react](./src/components/componentCooks/AddDish.js)**  
 - **[redux](./src/components/componentCooks/MenuCreateForm.js)**  
 - **[redux-thunk](./src/UserCook/action.js)**
-- **[Express](https://github.com/jendhordejan/BookACook-server/blob/master/index.js)
-- **[JsonWebToken](https://github.com/jendhordejan/BookACook-server/blob/master/auth/jwt.js)
+- **[Express](https://github.com/jendhordejan/BookACook-server/blob/master/index.js)**
+- **[JsonWebToken](https://github.com/jendhordejan/BookACook-server/blob/master/auth/jwt.js)**
 - **[Cloudinary - ImageUploader](https://github.com/jendhordejan/BookACook-client/blob/cf928ae6dc2f897123740a75375f68f4b7fafcc7/src/components/UploadImage.js)** :star:
 
 ## Goals for this project:
