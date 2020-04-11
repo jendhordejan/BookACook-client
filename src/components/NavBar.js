@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Avatar from "@material-ui/core/Avatar";
 
+import clsx from "clsx";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,

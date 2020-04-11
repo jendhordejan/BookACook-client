@@ -47,9 +47,9 @@ export default function DishListHome(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  //   const handleExpandClick = () => {
+  //     setExpanded(!expanded);
+  //   };
 
   const formatter = new Intl.NumberFormat("it-IT", {
     style: "currency",
@@ -64,34 +64,24 @@ export default function DishListHome(props) {
         {console.log("props.dishes: ", props.dishes)}
         {!props.dishes.dishes && "Loading..."}
         {props.dishes.dishes.map(dishItem => (
-          <Grid item key={dishItem} xs={12} sm={6} md={4}>
+          <Grid item key={dishItem.id} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="recipe" className={classes.avatar}>
-                    BaC
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title={dishItem.title}
-                subheader={dishItem.category}
-              />
               <CardMedia
                 className={classes.media}
                 image={dishItem.image}
-                title="Paella dish"
+                title={dishItem.title}
               />
               <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {dishItem.description}
+                <Typography variant="body1" color="primary" component="p">
+                  {dishItem.title}
                 </Typography>
+                <Typography variant="body2" color="secondary" component="p">
+                  {dishItem.category}
+                </Typography>
+
                 <Typography
-                  variant="h5"
-                  color="secondary"
+                  variant="body1"
+                  color="primary"
                   display="block"
                   component="p"
                 >
