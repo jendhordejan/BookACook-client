@@ -13,6 +13,7 @@ import MenuCreate from "./components/componentCooks/MenuCreateContainer";
 import Dashboard from "./components/Dashboard";
 
 import Footer from "./components/Footer";
+
 import { connect } from "react-redux";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Route path="/" exact component={Home} />
+
       <Route path="/signup" exact component={SignUpContainer} />
       <Route path="/signin" exact component={SignIn} />
       <Route path="/dashboard/:userId" exact component={Dashboard} />

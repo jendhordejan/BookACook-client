@@ -18,18 +18,49 @@ export function dishCreate(dishData) {
 
 //fetch all dishes component: Dashboard.js
 
-// export function dishGetAll() {
-//   console.log("inside dishGetAll");
+export function dishGetAll() {
+  console.log("inside dishGetAll");
 
+  return async (dispatch, getState) => {
+    try {
+      const { dishes } = getState;
+
+      if (!dishes) {
+        const responseData = await instance.get(`/alldishes`);
+
+        responseData.data.allDishes.map(dishItem => {
+          dispatch(dishGetAllSuccess(dishItem));
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+}
+
+// export function menuGetByUserId(userId) {
+//   const id = userId;
 //   return async (dispatch, getState) => {
 //     try {
-//       const { dishes } = getState;
+//       const responseData = await instance.get(`/menus/${id}`);
 
-//       if (!dishes) {
-//         const responseData = await instance.get()
-//       }
+//       console.log("menuGetByUserId responseData: ", responseData.data.menus);
+
+//       responseData.data.menus.map(menuData => {
+//         console.log("DISPATCH MENUDATA: ", menuData);
+//         dispatch(menuAllByUser(menuData));
+//       });
+//       // dispatch(menuAllByUser(responseData.data.menus));
 //     } catch (error) {
 //       throw error;
 //     }
 //   };
 // }
+
+function dishGetAllSuccess(respData) {
+  console.log("dishGetAllSuccess respData======>: ", respData);
+  return {
+    type: DISH_GET_ALL,
+    payload: respData
+  };
+}

@@ -7,6 +7,6 @@ import dishReducer from "./Dish/reducer";
 export default combineReducers({
   // your reducers will go here
   user: userReducer,
-  menus: menuReducer
-  // dishes: dishReducer.dishes
+  menus: menuReducer,
+  dishes: dishReducer
 });

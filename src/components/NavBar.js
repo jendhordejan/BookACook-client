@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Avatar from "@material-ui/core/Avatar";
 
+import clsx from "clsx";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -59,7 +61,7 @@ function NavBar(props) {
               Login
             </Button>
           ) : (
-            <Button color="inherit" href="/signin">
+            <Button color="inherit" href="/">
               Logout
             </Button>
           )}
