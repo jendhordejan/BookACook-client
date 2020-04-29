@@ -38,25 +38,6 @@ export function dishGetAll() {
   };
 }
 
-// export function menuGetByUserId(userId) {
-//   const id = userId;
-//   return async (dispatch, getState) => {
-//     try {
-//       const responseData = await instance.get(`/menus/${id}`);
-
-//       console.log("menuGetByUserId responseData: ", responseData.data.menus);
-
-//       responseData.data.menus.map(menuData => {
-//         console.log("DISPATCH MENUDATA: ", menuData);
-//         dispatch(menuAllByUser(menuData));
-//       });
-//       // dispatch(menuAllByUser(responseData.data.menus));
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
-// }
-
 function dishGetAllSuccess(respData) {
   console.log("dishGetAllSuccess respData======>: ", respData);
   return {
