@@ -1,68 +1,91 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BookACook
 
-## Available Scripts
+## What this project is about
 
-In the project directory, you can run:
+This is my own FullStack concept project. This is a website for booking a cook/chef to visit your place and cook the food that the customer chose. For more info why I am doing this checkout: **[Goals for this project](#goals-for-this-project)**
 
-### `npm start`
+## Table of contents:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **[Screenshots](#screenshots)**
+- **[Technologies used](#technologies-used)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[Features to be included in the future](#features-to-be-included-in-the-future)**
+- **[My git workflow](#my-git-workflow)**
+- **[My agile workflow and wireframe with agile user stories in Trello board](#my-agile-workflow-and-wireframe-with-agile-user-stories-in-trello-board)**
+- **[Server-repo](#server-repo)**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
+![Homepage](https://raw.githubusercontent.com/jendhordejan/BookACook-client/master/screenshots/HomePage2.png)
+![Registration](https://raw.githubusercontent.com/jendhordejan/BookACook-client/create-menu-dish-feature/screenshots/SignupCook1.png)
+![Login](https://raw.githubusercontent.com/jendhordejan/BookACook-client/create-menu-dish-feature/screenshots/Login.png)
+![CreateMenu1](https://raw.githubusercontent.com/jendhordejan/BookACook-client/create-menu-dish-feature/screenshots/CreateMenu1.png)
+![CreateMenu2](https://raw.githubusercontent.com/jendhordejan/BookACook-client/create-menu-dish-feature/screenshots/CreateMenu2.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies used
 
-### `npm run build`
+#### 👀👇 Click links to view some samples in this project 👇👀
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **[react](./src/components/componentCooks/AddDish.js)**  
+- **[redux](./src/components/componentCooks/MenuCreateForm.js)**  
+- **[redux-thunk](./src/UserCook/action.js)**
+- **[Express](https://github.com/jendhordejan/BookACook-server/blob/master/index.js)**
+- **[JsonWebToken](https://github.com/jendhordejan/BookACook-server/blob/master/auth/jwt.js)**
+- **[Cloudinary - ImageUploader](https://github.com/jendhordejan/BookACook-client/blob/cf928ae6dc2f897123740a75375f68f4b7fafcc7/src/components/UploadImage.js)** :star:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Goals for this project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- To practice for myself of a FullStack development
+- To showcase what I have learned during my coding bootcamp at codaisseur.
+- To showcase development approach of using **[wireframes](#wireframes)** with **[agile user-story](#user-story)**
+- **[To showcase disciplined git usage](#my-git-workflow)**
 
-### `npm run eject`
+## Features to be included in the future:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Functional shopping cart
+- Functional search feature
+- Send email/sms to cooking when booking
+- Chat feature between customers and cook
+- Filter dishes by category, dish name, location
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 👀👇 Click links to view the pull requests 👇👀
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **[Feat/Sign up cook](https://github.com/jendhordejan/BookACook-client/pull/5)**
+- **[Feat/create menu](https://github.com/jendhordejan/BookACook-client/pull/4)**
+- **[Code Review](https://github.com/jendhordejan/BookACook-client/pull/3)**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## My git workflow
 
-## Learn More
+In this project I try to use:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Good commit messages
+- Well named branches
+- Pull requests with summaries
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you have feedback to improve my git usage or wants to help out in this project: **[please drop me a line!](www.linkedin.com/in/jendhordejan)** 
 
-### Code Splitting
+Here is my branching model for this project.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+master (auto deploys) ______________________
+                       \               /
+development             \_____________/- pull request
+                         \           /
+feature/some-feature      \_commits_/- pull request
+```
 
-### Analyzing the Bundle Size
+## My agile workflow and wireframe with agile user stories in Trello board
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+I try to maintain a backlog eventhough I'm working on a project by myself. That way people can quickly jump in and start helping out. It also displays how I split up my tasks and try to build this project in an iterative and incremental way!
+## Wireframes
+**[Check out the wireframes for this project in my mockfow here](https://wireframepro.mockflow.com/view/M5dbc78c2ea1094c1e92b74cc94b978731583163960069)**
+## User-story
+**[Check out the user stories in my trelloboard here](https://trello.com/b/3IisbXZ6/bac-book-a-cook)**
 
-### Making a Progressive Web App
+## Server-repo
+The server side of this project is an Express server connected to a Sequelize database. [Click here for more details](https://github.com/jendhordejan/BookACook-server)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
